@@ -1,0 +1,50 @@
+﻿
+
+<div ng-app="app" style="margin-top: 120px;">
+    <div ng-controller="employeesController">
+        <h1>Employees</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th ng-click="changeSortOrder('FullName')">FullName</th>
+                    <th ng-click="changeSortOrder('Gender')">Gender</th>
+                    <th>ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="e in employees.Items">
+                    <td>{{e.FullName}}</td>
+                    <td>{{genderLookup[e.Gender]}}</td>
+                    <td>{{e.Id}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <small>Showing {{query.pagination.itemsPerPage}} items out of {{employees.TotalCount}}</small>
+        </div>
+
+        <div>
+            <div data-ui-pagination="query.pagination" data-total-count="employees.TotalCount">
+                <ul class="pagination">
+                    <li ng-class="{ disabled: pagination.page === 1 }">
+                        <a href="" aria-label="Previous" ng-click="pagination.page = pagination.page-1;">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li ng-repeat="p in pages" ng-class="{ active: pagination.page === p }">
+                        <a href="" ng-click="pagination.page = p;">{{p}}<span class="sr-only">(current)</span></a>
+                    <li>
+
+                    <li ng-class="{ disabled: pagination.page === totalPageCount }">
+                        <a href="" aria-label="Next" ng-click="pagination.page = pagination.page+1;">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
