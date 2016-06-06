@@ -25,7 +25,7 @@ namespace Canberra.TestTask.Codebase.Common
                     .Name;
             }
 
-            var parameter = Expression.Parameter(typeof(T));
+            var parameter = Expression.Parameter(typeof(T), "x");
 
             var command = paging.Sorting.Direction == SortDirection.Descending ? "OrderByDescending" : "OrderBy";
 
