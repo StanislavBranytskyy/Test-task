@@ -23,17 +23,18 @@ namespace Canberra.TestTask.Codebase.Repositories
 
         public PagedCollection<Employee> Query(PagedCollectionQuery query)
         {
-            var errors = query.Validate(new ValidationContext(query));
-            if (errors.Any())
-            {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-            }
 
             if (query.Pagination == null)
                 query.Pagination = Pagination.Default;
 
             if (query.Sorting == null || string.IsNullOrEmpty(query.Sorting.Property))
                 query.Sorting = DefaultSorting;
+
+            var errors = query.Validate(new ValidationContext(query));
+            if (errors.Any())
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
 
             var items = _context.Persons;
 
